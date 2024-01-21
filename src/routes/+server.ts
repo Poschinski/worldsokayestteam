@@ -1,24 +1,21 @@
 import { json } from "@sveltejs/kit";
-import { riotIdStore } from "$lib/stores.js";
 import type { RiotAccountDto, RiotSummonerDto, LeagueEntryDto } from "../lib/index";
 
 export const POST = async ({ request }) => {
     const res = await request.json()
-    riotIdStore.set(res.riotId);
-    await getSummonerData();
+    const leagueEntries: LeagueEntryDto[] = await getSummonerData(res.riotId);
     return json({
         status: 200,
-        message: 'ok'
+        message: 'OK',
+        data: leagueEntries
     })
-
 }
 
-let riotId_value: string  = "";
-
-let name: string;
-let tag: string;
-
-async function getPUUID() {
+async function getPUUID(riotId: string) {
+    let name = riotId.split("#")[0];
+    let tag = riotId.split("#")[1];
+    name = encodeURIComponent(name);
+    tag = encodeURIComponent(tag);
     const res = await fetch(`https://europe.api.riotgames.com/riot/account/v1/accounts/by-riot-id/${name}/${tag}`, {
         headers: {
             "X-Riot-Token": import.meta.env.VITE_RIOT_API_KEY
@@ -51,18 +48,13 @@ async function getLeagueEntries(summonerId: string) {
     return data;
 }
 
-async function getSummonerData() {
-    riotIdStore.subscribe((value) => { riotId_value = value });
-    name = riotId_value.split("#")[0];
-    tag = riotId_value.split("#")[1];
-
-    console.log("riot id: " + riotId_value);
-
-    const puuid = await getPUUID();
+async function getSummonerData(riotId: string) {
+    
+    const puuid = await getPUUID(riotId);
     const summonerId = await getSummonerId(puuid);
     const leagueEntries = await getLeagueEntries(summonerId);
 
-    console.log(leagueEntries);
+    return leagueEntries;
 }
 
 

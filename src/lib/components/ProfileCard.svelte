@@ -1,54 +1,89 @@
 <script lang="ts">
-    import { riotIdStore } from "$lib/stores.js";
-	import { onMount } from "svelte";
+	export let riotId: string;
+	export let role: string;
 
-    export let riotId: string;
-    export let role: string;
+	let res: Promise<any> | null = sendData();
 
-    let res: Promise<any> | null = null
-
-    riotIdStore.set(riotId);
-
-    async function sendData() {
-		res = await fetch("/", {
-			method: "POST",
+	async function sendData() {
+		res = await fetch('/', {
+			method: 'POST',
 			headers: {
-				"Content-Type": "application/json"
+				'Content-Type': 'application/json'
 			},
 			body: JSON.stringify({
 				riotId
 			})
 		}).then(async (res) => {
 			const ress = await res.json();
-			console.log(ress);
 			return ress;
-	});
+		});
+		return res;
 	}
 
-    onMount(() => {
-        sendData();
-    });
-    
-    
 </script>
 
-<div class="card">
-    <h3>{riotId}</h3>
-    <p>{role}</p>
-    <div class="solo-q">
-        <div class="left-side">
+{#await res}
+	<p>loading...</p>
+{:then response}
+	<div class="card">
+		<h3>{riotId}</h3>
+		<p>{role}</p>
+        <div class="solo-q">
+			<div class="left-side"></div>
+			<div class="right-side">
+				<h3>Solo-Q</h3>
+                {#if response.data[1] == null || response.data[1] == undefined}
+				<p>Unranked</p>
+                {:else}
+                <p>{response.data[1].tier} {response.data[1].rank}</p>
+                {/if}
+			</div>
+		</div>
+        <div class="flex-q">
+			<div class="left-side"></div>
+			<div class="right-side">
+				<h3>Flex-Q</h3>
+                {#if response.data[0] == null || response.data[0] == undefined}
+				<p>Unranked</p>
+                {:else}
+                <p>{response.data[0].tier} {response.data[0].rank}</p>
+                {/if}
+			</div>
+		</div>
+	</div>
+{:catch error}
+	<p>{error.message}</p>
+{/await}
 
-        </div>
-        <div class="right-side">
-
-        </div>
-    </div>
-    <div class="flex-q">
-        <div class="left-side">
-
-        </div>
-        <div class="right-side">
-
-        </div>
-    </div>
-</div>
+<style>
+	.card {
+		box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+		transition: 0.3s;
+		border-radius: 5px;
+		padding: 20px;
+		margin: 10px;
+		background-color: #f5f5f5;
+		width: 300px;
+	}
+	.card h3 {
+		color: #333;
+		font-size: 24px;
+	}
+	.card p {
+		color: #666;
+		font-size: 18px;
+	}
+	.solo-q,
+	.flex-q {
+		display: flex;
+		justify-content: space-between;
+		margin-top: 20px;
+	}
+	.left-side,
+	.right-side {
+		flex-basis: 50%;
+	}
+	.right-side {
+		text-align: right;
+	}
+</style>

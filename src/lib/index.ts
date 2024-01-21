@@ -32,3 +32,9 @@ export type LeagueEntryDto = {
     freshBlood: boolean;
     inactive: boolean;
 }
+
+export type ApiResponse = {
+    status?: number;
+    message?: string;
+    data?: LeagueEntryDto[];
+}
