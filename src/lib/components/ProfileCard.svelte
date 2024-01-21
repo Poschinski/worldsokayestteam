@@ -1,8 +1,34 @@
 <script lang="ts">
-    import type { RiotAccountDto, RiotSummonerDto, LeagueEntryDto } from "$lib/index";
+    import { riotIdStore } from "$lib/stores.js";
+	import { onMount } from "svelte";
+
     export let riotId: string;
     export let role: string;
 
+    let res: Promise<any> | null = null
+
+    riotIdStore.set(riotId);
+
+    async function sendData() {
+		res = await fetch("/", {
+			method: "POST",
+			headers: {
+				"Content-Type": "application/json"
+			},
+			body: JSON.stringify({
+				riotId
+			})
+		}).then(async (res) => {
+			const ress = await res.json();
+			console.log(ress);
+			return ress;
+	});
+	}
+
+    onMount(() => {
+        sendData();
+    });
+    
     
 </script>
 
