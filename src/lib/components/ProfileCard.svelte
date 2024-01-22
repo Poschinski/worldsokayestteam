@@ -29,18 +29,28 @@
 		<h3>{riotId}</h3>
 		<p>{role}</p>
         <div class="solo-q">
-			<div class="left-side"></div>
+			{#if response.data[1] == null || response.data[1] == undefined}
+			<div class="left-side">
+				<img src="/img/unranked.webp" alt="league rank"/>
+			</div>
 			<div class="right-side">
 				<h3>Solo-Q</h3>
-                {#if response.data[1] == null || response.data[1] == undefined}
 				<p>Unranked</p>
-                {:else}
-                <p>{response.data[1].tier} {response.data[1].rank}</p>
-                {/if}
 			</div>
+			{:else}
+			<div class="left-side">
+				<img src="/img/{(response.data[1].tier).toLowerCase()}.png" alt="league rank"/>
+			</div>
+			<div class="right-side">
+				<h3>Solo-Q</h3>
+				<p>{response.data[1].tier} {response.data[1].rank}</p>
+			</div>
+			{/if}
 		</div>
         <div class="flex-q">
-			<div class="left-side"></div>
+			<div class="left-side">
+				<img src="/img/{(response.data[0].tier).toLowerCase()}.png" alt="league rank"/>
+			</div>
 			<div class="right-side">
 				<h3>Flex-Q</h3>
                 {#if response.data[0] == null || response.data[0] == undefined}
