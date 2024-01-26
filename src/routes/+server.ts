@@ -43,7 +43,14 @@ async function getLeagueEntries(summonerId: string) {
             "X-Riot-Token": import.meta.env.VITE_RIOT_API_KEY
         }
     });
-    const data: LeagueEntryDto[] = await res.json();
+    let data: LeagueEntryDto[] = await res.json();
+    
+    // Sort by queue type
+    data = data.sort((a, b) => { 
+        if (a.queueType > b.queueType) return 1;
+        if (a.queueType < b.queueType) return -1;
+        return 0;
+    });
 
     return data;
 }

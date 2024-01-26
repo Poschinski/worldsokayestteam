@@ -44,6 +44,7 @@
 			<div class="right-side">
 				<h3>Solo-Q</h3>
 				<p>{response.data[1].tier} {response.data[1].rank}</p>
+				<p>Winrate: {Math.round((response.data[1].wins / (response.data[1].wins + response.data[1].losses))*1000) /10} %</p>
 			</div>
 			{/if}
 		</div>
@@ -57,6 +58,7 @@
 				<p>Unranked</p>
                 {:else}
                 <p>{response.data[0].tier} {response.data[0].rank}</p>
+				<p>Winrate: {Math.round((response.data[0].wins / (response.data[0].wins + response.data[0].losses))*1000) /10} %</p>
                 {/if}
 			</div>
 		</div>
