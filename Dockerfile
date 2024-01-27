@@ -21,18 +21,11 @@ FROM node:20.11.0-alpine3.19
 
 WORKDIR /app
 
-# Copy package.json and package-lock.json (or yarn.lock) from the build stage
-COPY --from=build /app/package*.json ./
-
-# Install only production dependencies
-RUN npm install --only=production
-
 # Copy the built app from the build stage
 COPY --from=build /app/build ./build
-COPY --from=build /app/static ./static
 
 # Expose the port the app runs on
 EXPOSE 3000
 
 # Define the command to run the app
-CMD ["npm", "run", "start"]
+CMD ["node", "./build/index.js"]
