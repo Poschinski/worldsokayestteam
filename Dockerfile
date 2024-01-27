@@ -32,7 +32,7 @@ COPY --from=build /app/build ./build
 COPY --from=build /app/static ./static
 
 # Expose the port the app runs on
-EXPOSE 80
+EXPOSE 3000
 
 # Define the command to run the app
 CMD ["npm", "run", "start"]
