@@ -1,15 +1,38 @@
 # Use Node 20.11 alpine as parent image
 FROM node:20.11.0-alpine3.19 as build
 
+# Set the working directory in the Docker container
 WORKDIR /app
-COPY . /app
 
+# Copy package.json and package-lock.json (or yarn.lock) to Docker environment
+COPY package*.json ./
+
+# Install dependencies in the Docker container
 RUN npm install
+
+# Copy the rest of the codebase into the Docker container
+COPY . .
+
+# Build the app
 RUN npm run build
 
-FROM ubuntu
-RUN apt-get update
-RUN apt-get install nginx -y
-COPY --from=build /app/build /var/www/html/
+# Stage 2: Run the app
+FROM node:20.11.0-alpine3.19
+
+WORKDIR /app
+
+# Copy package.json and package-lock.json (or yarn.lock) from the build stage
+COPY --from=build /app/package*.json ./
+
+# Install only production dependencies
+RUN npm install --only=production
+
+# Copy the built app from the build stage
+COPY --from=build /app/build ./build
+COPY --from=build /app/static ./static
+
+# Expose the port the app runs on
 EXPOSE 80
-CMD ["nginx","-g","daemon off;"]
+
+# Define the command to run the app
+CMD ["npm", "run", "start"]
