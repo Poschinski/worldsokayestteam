@@ -1,6 +1,9 @@
 # Use Node 20.11 alpine as parent image
 FROM node:20.11.0-alpine3.19 as build
 
+# Set an argument for the API key, which can be passed during the build process
+ARG RIOT_API_KEY
+
 # Set the working directory in the Docker container
 WORKDIR /app
 
@@ -10,6 +13,8 @@ COPY package*.json ./
 # Install dependencies in the Docker container
 RUN npm install
 
+# Set the API key as an environment variable for the build process
+ENV VITE_RIOT_API_KEY=$RIOT_API_KEY
 
 # Copy the rest of the codebase into the Docker container
 COPY . .
@@ -21,9 +26,6 @@ RUN npm run build
 FROM node:20.11.0-alpine3.19
 
 WORKDIR /app
-
-# Set the API key as an environment variable
-ENV VITE_RIOT_API_KEY=$RIOT_API_KEY
 
 # Copy the built app from the build stage
 COPY --from=build /app/build ./build
