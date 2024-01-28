@@ -23,6 +23,7 @@ WORKDIR /app
 
 # Copy the built app from the build stage
 COPY --from=build /app/build ./build
+COPY package.json ./
 
 # Expose the port the app runs on
 EXPOSE 3000
