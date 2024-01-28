@@ -10,6 +10,9 @@ COPY package*.json ./
 # Install dependencies in the Docker container
 RUN npm install
 
+# Set the API key as an environment variable
+ENV VITE_RIOT_API_KEY=$RIOT_API_KEY
+
 # Copy the rest of the codebase into the Docker container
 COPY . .
 
@@ -30,3 +33,4 @@ EXPOSE 3000
 
 # Define the command to run the app
 CMD ["node", "./build/index.js"]
+
