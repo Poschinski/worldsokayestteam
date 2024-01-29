@@ -33,17 +33,17 @@
 				{#if response.data[1] == null || response.data[1] == undefined}
 					<div class="left-side">
 						<img src="/img/unranked.webp" alt="league rank" />
+						<h3>Solo-Q</h3>
 					</div>
 					<div class="right-side">
-						<h3>Solo-Q</h3>
 						<p>Unranked</p>
 					</div>
 				{:else}
 					<div class="left-side">
 						<img src="/img/{response.data[1].tier.toLowerCase()}.png" alt="league rank" />
+						<h3>Solo-Q</h3>
 					</div>
 					<div class="right-side">
-						<h3>Solo-Q</h3>
 						<p>
 							{response.data[1].tier}
 							{response.data[1].rank} - {response.data[1].leaguePoints} LP
@@ -64,17 +64,17 @@
 				{#if response.data[0] == null || response.data[0] == undefined}
 					<div class="left-side">
 						<img src="/img/unranked.webp" alt="league rank" />
+						<h3>Flex-Q</h3>
 					</div>
 					<div class="right-side">
-						<h3>Flex-Q</h3>
 						<p>Unranked</p>
 					</div>
 				{:else}
 					<div class="left-side">
 						<img src="/img/{response.data[0].tier.toLowerCase()}.png" alt="league rank" />
+						<h3>Flex-Q</h3>
 					</div>
 					<div class="right-side">
-						<h3>Flex-Q</h3>
 						<p>{response.data[0].tier} {response.data[0].rank} - {response.data[1].leaguePoints} LP</p>
 						<p>
 							Winrate: {Math.round(
