@@ -26,9 +26,12 @@
 	<p>loading...</p>
 {:then response}
 	<div class="card">
-		<h3>{riotId}</h3>
-		<p>{role}</p>
+		<div class="card-header border-b-2 mb-1">
+			<h3>{riotId}</h3>
+			<p>{role}</p>
+		</div>
 		{#if response && response.data && response.data.length > 0}
+		<div class="card-body">
 			<div class="solo-q">
 				{#if response.data[1] == null || response.data[1] == undefined}
 					<div class="left-side">
@@ -88,6 +91,7 @@
 					</div>
 				{/if}
 			</div>
+		</div>
 		{:else}
 			<p>Could not load any Data.</p>
 		{/if}
@@ -115,17 +119,11 @@
 		font-size: 18px;
 		text-align: center;
 	}
-	.league-info {
-		display: flex;
-		flex-direction: column;
-		padding: 20px;
-	}
 	.solo-q, .flex-q {
 		display: flex;
 		align-items: center;
 		justify-content: space-between;
-		margin-top: 20px;
-		padding: 20px;
+		padding: 10px;
 		border-radius: 10px;
 	}
 	.wins-loses {
