@@ -30,12 +30,18 @@
 </div>
 
 <div id="league-info" class="mt-10">
+	<p class="text-3xl">Das Main Roaster</p>
 	<div class="card-wrapper">
 		<ProfileCard riotId="WOT Spiiekiie#EUW" role="Top" />
 		<ProfileCard riotId="WOT Forest#EUW" role="Jungle" />
-		<ProfileCard riotId="WOT Schorsch#EUW" role="Mid" />
+		<ProfileCard riotId="Poschinski #1337" role="Mid" />
 		<ProfileCard riotId="WOT val played#EUW" role="ADC" />
 		<ProfileCard riotId="WOT Aradius#EUW" role="Support" />
+	</div>
+	<p class="text-3xl">Unsere Substitues</p>
+	<div class="card-wrapper">
+		<ProfileCard riotId="WOT Rexxit#EUW" role="Top" />
+		<ProfileCard riotId="WOT Gustl#EUW" role="Jungle" />
 	</div>
 </div>
 
