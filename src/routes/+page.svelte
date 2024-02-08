@@ -29,19 +29,21 @@
 	<a href="#league-info">h</a>
 </div>
 
-<div id="league-info" class="mt-10">
-	<p class="text-3xl">Das Main Roaster</p>
+<div id="league-info" class="mt-10 flex flex-col">
+	<p class="text-3xl mb-6 text-center">Das Main Roaster</p>
+		<div class="card-wrapper mb-6">
+			<ProfileCard riotId="WOT Spiiekiie#EUW" role="Top" />
+			<ProfileCard riotId="WOT Forest#EUW" role="Jungle" />
+			<ProfileCard riotId="Poschinski #1337" role="Mid" />
+			<ProfileCard riotId="WOT val played#EUW" role="ADC" />
+			<ProfileCard riotId="WOT Aradius#EUW" role="Support" />
+		</div>
+	<p class="text-3xl mb-6 text-center">Unsere Substitues</p>
 	<div class="card-wrapper">
-		<ProfileCard riotId="WOT Spiiekiie#EUW" role="Top" />
-		<ProfileCard riotId="WOT Forest#EUW" role="Jungle" />
-		<ProfileCard riotId="Poschinski #1337" role="Mid" />
-		<ProfileCard riotId="WOT val played#EUW" role="ADC" />
-		<ProfileCard riotId="WOT Aradius#EUW" role="Support" />
-	</div>
-	<p class="text-3xl">Unsere Substitues</p>
-	<div class="card-wrapper">
-		<ProfileCard riotId="WOT Rexxit#EUW" role="Top" />
-		<ProfileCard riotId="WOT Gustl#EUW" role="Jungle" />
+		<ProfileCard riotId="WOT Rexxit#EUW" role="Support" />
+		<ProfileCard riotId="WOT Gustl#EUW" role="Top" />
+		<ProfileCard riotId="WOT Schorsch#EUW" role="ADC" />
+		<ProfileCard riotId="WOT Schorsch#EUW" role="ADC" />
 	</div>
 </div>
 
@@ -81,7 +83,7 @@
 	}
 
 	#league-info {
-		height: 100vh;
+		width: 100%;
 	}
 
 </style>
