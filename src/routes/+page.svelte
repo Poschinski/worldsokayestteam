@@ -16,7 +16,7 @@
 	</nav>
 </header>
 
-<div class="introduction flex items-center justify-center border-b-2">
+<div id="introduction" class="flex items-center justify-center border-b-2">
 	<div id="title" class="text-center text-3xl">
 		<p> Die Welt braucht mehr okaye Leute.</p>
 		<br />
@@ -29,22 +29,27 @@
 	<a href="#league-info">h</a>
 </div>
 
-<div id="league-info" class="mt-10 flex flex-col">
+<div id="league-info" class="mt-6 flex flex-col">
 	<p class="text-3xl mb-6 text-center">Das Main Roaster</p>
 		<div class="card-wrapper mb-6">
 			<ProfileCard riotId="WOT Spiiekiie#EUW" role="Top" />
 			<ProfileCard riotId="WOT Forest#EUW" role="Jungle" />
-			<ProfileCard riotId="Poschinski #1337" role="Mid" />
-			<ProfileCard riotId="WOT val played#EUW" role="ADC" />
-			<ProfileCard riotId="WOT Aradius#EUW" role="Support" />
+			<ProfileCard riotId="WOT Aradius#EUW" role="Mid" />
+			<ProfileCard riotId="Poschinski #1337" role="ADC" />
+			<ProfileCard riotId="WOT val played#EUW" role="Support" />
 		</div>
-	<p class="text-3xl mb-6 text-center">Unsere Substitues</p>
+	<p class="text-3xl mb-6 text-center">Unsere Substitutes</p>
 	<div class="card-wrapper">
-		<ProfileCard riotId="WOT Rexxit#EUW" role="Support" />
 		<ProfileCard riotId="WOT Gustl#EUW" role="Top" />
+		<ProfileCard riotId="DirtySixX#EUW" role="Jungle" />
+		<ProfileCard riotId="Skeletonking #EUW" role="MID" />
 		<ProfileCard riotId="WOT Schorsch#EUW" role="ADC" />
-		<ProfileCard riotId="WOT Schorsch#EUW" role="ADC" />
+		<ProfileCard riotId="WOT Rexxit#EUW" role="Support" />
 	</div>
+</div>
+
+<div id="prime-league" class="mt-6">
+	<p class="text-3xl text-center">Prime-League</p>
 </div>
 
 <style lang="postcss">
@@ -78,7 +83,7 @@
 		flex-wrap: wrap;
 	}
 
-	.introduction {
+	#introduction {
 		height: 100vh;
 	}
 
