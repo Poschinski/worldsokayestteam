@@ -31,69 +31,91 @@
 			<p>{role}</p>
 		</div>
 		{#if response && response.data && response.data.length > 0}
-		<div class="card-body">
-			<div class="solo-q">
-				{#if response.data[1] == null || response.data[1] == undefined}
-					<div class="left-side">
-						<img src="/img/unranked.webp" alt="league rank" />
-						<h3>Solo-Q</h3>
-					</div>
-					<div class="right-side">
-						<p>Unranked</p>
-					</div>
-				{:else}
-					<div class="left-side">
-						<img src="/img/{response.data[1].tier.toLowerCase()}.png" alt="league rank" />
-						<h3>Solo-Q</h3>
-					</div>
-					<div class="right-side">
-						<p>
-							{response.data[1].tier}
-							{response.data[1].rank} - {response.data[1].leaguePoints} LP
-						</p>
-						<p>
-							Winrate: {Math.round(
-								(response.data[1].wins / (response.data[1].wins + response.data[1].losses)) * 1000
-							) / 10}%
-						</p>
-						<div class="wins-loses">
-							<p>Wins: {response.data[1].wins} -&nbsp</p>
-							<p>Losses: {response.data[1].losses}</p>
+			<div class="card-body">
+				<div class="solo-q">
+					{#if response.data[1] == null || response.data[1] == undefined}
+						<div class="left-side">
+							<img src="/img/unranked.webp" alt="league rank" />
+							<h3>Solo-Q</h3>
 						</div>
-					</div>
-				{/if}
-			</div>
-			<div class="flex-q">
-				{#if response.data[0] == null || response.data[0] == undefined}
-					<div class="left-side">
-						<img src="/img/unranked.webp" alt="league rank" />
-						<h3>Flex-Q</h3>
-					</div>
-					<div class="right-side">
-						<p>Unranked</p>
-					</div>
-				{:else}
-					<div class="left-side">
-						<img src="/img/{response.data[0].tier.toLowerCase()}.png" alt="league rank" />
-						<h3>Flex-Q</h3>
-					</div>
-					<div class="right-side">
-						<p>{response.data[0].tier} {response.data[0].rank} - {response.data[1].leaguePoints} LP</p>
-						<p>
-							Winrate: {Math.round(
-								(response.data[0].wins / (response.data[0].wins + response.data[0].losses)) * 1000
-							) / 10}%
-						</p>
-						<div class="wins-loses">
-							<p>Wins: {response.data[0].wins} -&nbsp</p>
-							<p>Losses: {response.data[0].losses}</p>
+						<div class="right-side">
+							<p>Unranked</p>
 						</div>
-					</div>
-				{/if}
+					{:else}
+						<div class="left-side">
+							<img src="/img/{response.data[1].tier.toLowerCase()}.png" alt="league rank" />
+							<h3>Solo-Q</h3>
+						</div>
+						<div class="right-side">
+							<p>
+								{response.data[1].tier}
+								{response.data[1].rank} - {response.data[1].leaguePoints} LP
+							</p>
+							<p>
+								Winrate: {Math.round(
+									(response.data[1].wins / (response.data[1].wins + response.data[1].losses)) * 1000
+								) / 10}%
+							</p>
+							<div class="wins-loses">
+								<p>Wins: {response.data[1].wins} -&nbsp</p>
+								<p>Losses: {response.data[1].losses}</p>
+							</div>
+						</div>
+					{/if}
+				</div>
+				<div class="flex-q">
+					{#if response.data[0] == null || response.data[0] == undefined}
+						<div class="left-side">
+							<img src="/img/unranked.webp" alt="league rank" />
+							<h3>Flex-Q</h3>
+						</div>
+						<div class="right-side">
+							<p>Unranked</p>
+						</div>
+					{:else}
+						<div class="left-side">
+							<img src="/img/{response.data[0].tier.toLowerCase()}.png" alt="league rank" />
+							<h3>Flex-Q</h3>
+						</div>
+						<div class="right-side">
+							<p>
+								{response.data[0].tier}
+								{response.data[0].rank} - {response.data[1].leaguePoints} LP
+							</p>
+							<p>
+								Winrate: {Math.round(
+									(response.data[0].wins / (response.data[0].wins + response.data[0].losses)) * 1000
+								) / 10}%
+							</p>
+							<div class="wins-loses">
+								<p>Wins: {response.data[0].wins} -&nbsp</p>
+								<p>Losses: {response.data[0].losses}</p>
+							</div>
+						</div>
+					{/if}
+				</div>
 			</div>
-		</div>
 		{:else}
-			<p>Could not load any Data.</p>
+			<div class="card-body">
+				<div class="solo-q">
+					<div class="left-side">
+						<img src="/img/unranked.png" alt="league rank" />
+						<h3>Solo-Q</h3>
+					</div>
+					<div class="right-side">
+						<p>Unranked</p>
+					</div>
+				</div>
+				<div class="flex-q">
+					<div class="left-side">
+						<img src="/img/unranked.png" alt="league rank" />
+						<h3>Flex-Q</h3>
+					</div>
+					<div class="right-side">
+						<p>Unranked</p>
+					</div>
+				</div>
+			</div>
 		{/if}
 	</div>
 {:catch error}
@@ -119,7 +141,8 @@
 		font-size: 18px;
 		text-align: center;
 	}
-	.solo-q, .flex-q {
+	.solo-q,
+	.flex-q {
 		display: flex;
 		align-items: center;
 		justify-content: space-between;
