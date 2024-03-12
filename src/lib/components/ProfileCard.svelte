@@ -1,14 +1,17 @@
 <script lang="ts">
-	import type { ApiResponse } from '$lib';
+	import type { ApiResponse, LeagueEntryDto } from '$lib';
 	import { onMount } from 'svelte';
+	import LeagueData from './LeagueData.svelte';
 
 	export let riotId: string;
 	export let role: string;
 
 	let promise: Promise<ApiResponse>;
+	let soloQData: LeagueEntryDto | null = null;
+	let flexQData: LeagueEntryDto | null = null;
 
 	onMount(() => {
-		promise = fetch('/', {
+		fetch('/', {
 			method: 'POST',
 			headers: {
 				'Content-Type': 'application/json'
@@ -16,10 +19,27 @@
 			body: JSON.stringify({
 				riotId
 			})
-		}).then((res) => {
-			return res.json();
-		});
+		})
+			.then((res) => res.json())
+			.then((apiData) => {
+				defineQueueType(apiData);
+			});
 	});
+
+	function defineQueueType(apiData: ApiResponse) {
+	
+		if (!apiData.data) return;
+
+		const data = apiData.data;
+		data.forEach((entry: LeagueEntryDto) => {
+			if (entry.queueType === 'RANKED_SOLO_5x5') {
+				soloQData = entry;
+			} else if (entry.queueType === 'RANKED_FLEX_SR') {
+				flexQData = entry;
+			}
+		});
+	}
+
 </script>
 
 {#await promise}
@@ -30,93 +50,10 @@
 			<h3>{riotId}</h3>
 			<p>{role}</p>
 		</div>
-		{#if response && response.data && response.data.length > 0}
-			<div class="card-body">
-				<div class="solo-q">
-					{#if response.data[1] == null || response.data[1] == undefined}
-						<div class="left-side">
-							<img src="/img/unranked.webp" alt="league rank" />
-							<h3>Solo-Q</h3>
-						</div>
-						<div class="right-side">
-							<p>Unranked</p>
-						</div>
-					{:else}
-						<div class="left-side">
-							<img src="/img/{response.data[1].tier.toLowerCase()}.png" alt="league rank" />
-							<h3>Solo-Q</h3>
-						</div>
-						<div class="right-side">
-							<p>
-								{response.data[1].tier}
-								{response.data[1].rank} - {response.data[1].leaguePoints} LP
-							</p>
-							<p>
-								Winrate: {Math.round(
-									(response.data[1].wins / (response.data[1].wins + response.data[1].losses)) * 1000
-								) / 10}%
-							</p>
-							<div class="wins-loses">
-								<p>Wins: {response.data[1].wins} -&nbsp</p>
-								<p>Losses: {response.data[1].losses}</p>
-							</div>
-						</div>
-					{/if}
-				</div>
-				<div class="flex-q">
-					{#if response.data[0] == null || response.data[0] == undefined}
-						<div class="left-side">
-							<img src="/img/unranked.webp" alt="league rank" />
-							<h3>Flex-Q</h3>
-						</div>
-						<div class="right-side">
-							<p>Unranked</p>
-						</div>
-					{:else}
-						<div class="left-side">
-							<img src="/img/{response.data[0].tier.toLowerCase()}.png" alt="league rank" />
-							<h3>Flex-Q</h3>
-						</div>
-						<div class="right-side">
-							<p>
-								{response.data[0].tier}
-								{response.data[0].rank} - {response.data[1].leaguePoints} LP
-							</p>
-							<p>
-								Winrate: {Math.round(
-									(response.data[0].wins / (response.data[0].wins + response.data[0].losses)) * 1000
-								) / 10}%
-							</p>
-							<div class="wins-loses">
-								<p>Wins: {response.data[0].wins} -&nbsp</p>
-								<p>Losses: {response.data[0].losses}</p>
-							</div>
-						</div>
-					{/if}
-				</div>
-			</div>
-		{:else}
-			<div class="card-body">
-				<div class="solo-q">
-					<div class="left-side">
-						<img src="/img/unranked.png" alt="league rank" />
-						<h3>Solo-Q</h3>
-					</div>
-					<div class="right-side">
-						<p>Unranked</p>
-					</div>
-				</div>
-				<div class="flex-q">
-					<div class="left-side">
-						<img src="/img/unranked.png" alt="league rank" />
-						<h3>Flex-Q</h3>
-					</div>
-					<div class="right-side">
-						<p>Unranked</p>
-					</div>
-				</div>
-			</div>
-		{/if}
+		<div class="card-body">
+			<LeagueData league={soloQData} type="Solo Queue" />
+			<LeagueData league={flexQData} type="Flex Queue" />
+		</div>
 	</div>
 {:catch error}
 	<p>{error.message}</p>
@@ -141,28 +78,5 @@
 		font-size: 18px;
 		text-align: center;
 	}
-	.solo-q,
-	.flex-q {
-		display: flex;
-		align-items: center;
-		justify-content: space-between;
-		padding: 10px;
-		border-radius: 10px;
-	}
-	.wins-loses {
-		display: flex;
-	}
-	.left-side {
-		flex-basis: 40%;
-		display: flex;
-		flex-direction: column;
-		align-items: center;
-	}
-	.right-side {
-		flex-basis: 60%;
-		text-align: right;
-		display: flex;
-		flex-direction: column;
-		align-items: center;
-	}
+	
 </style>
