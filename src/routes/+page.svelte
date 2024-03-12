@@ -26,7 +26,6 @@
 		<br />
 		<p class="underline"> WORLDS OKAYEST TEAM </p>
 	</div>
-	<a href="#league-info">h</a>
 </div>
 
 <div id="league-info" class="mt-6 flex flex-col">
@@ -35,14 +34,14 @@
 			<ProfileCard riotId="WOT Spiiekiie#EUW" role="Top" />
 			<ProfileCard riotId="WOT Forest#EUW" role="Jungle" />
 			<ProfileCard riotId="WOT Aradius#EUW" role="Mid" />
-			<ProfileCard riotId="Poschinski #1337" role="ADC" />
+			<ProfileCard riotId="Poschinski#1337" role="ADC" />
 			<ProfileCard riotId="WOT val played#EUW" role="Support" />
 		</div>
 	<p class="text-3xl mb-6 text-center">Unsere Substitutes</p>
 	<div class="card-wrapper">
 		<ProfileCard riotId="WOT Gustl#EUW" role="Top" />
-		<ProfileCard riotId="DirtySixX#EUW" role="Jungle" />
-		<ProfileCard riotId="Skeletonking #EUW" role="MID" />
+		<ProfileCard riotId="WOT DirtySixX#1464" role="Jungle" />
+		<ProfileCard riotId="Skeletonking#EUW" role="Mid" />
 		<ProfileCard riotId="WOT Schorsch#EUW" role="ADC" />
 		<ProfileCard riotId="WOT Rexxit#EUW" role="Support" />
 	</div>

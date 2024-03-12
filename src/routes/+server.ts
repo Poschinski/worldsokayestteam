@@ -44,13 +44,6 @@ async function getLeagueEntries(summonerId: string) {
         }
     });
     let data: LeagueEntryDto[] = await res.json();
-    
-    // Sort by queue type
-    data = data.sort((a, b) => { 
-        if (a.queueType > b.queueType) return 1;
-        if (a.queueType < b.queueType) return -1;
-        return 0;
-    });
 
     return data;
 }
