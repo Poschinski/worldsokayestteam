@@ -1,36 +1,16 @@
 <script lang="ts">
-	import type { ApiResponse, LeagueEntryDto } from '$lib';
-	import { onMount } from 'svelte';
+	import type { ApiResponse, LeagueEntryDto, LeaguePlayerInfo } from '$lib';
 	import LeagueData from './LeagueData.svelte';
 
-	export let riotId: string;
-	export let role: string;
+	export let playerInfo: LeaguePlayerInfo;
 
-	let promise: Promise<ApiResponse>;
 	let soloQData: LeagueEntryDto | null = null;
 	let flexQData: LeagueEntryDto | null = null;
 
-	onMount(() => {
-		fetch('/', {
-			method: 'POST',
-			headers: {
-				'Content-Type': 'application/json'
-			},
-			body: JSON.stringify({
-				riotId
-			})
-		})
-			.then((res) => res.json())
-			.then((apiData) => {
-				defineQueueType(apiData);
-			});
-	});
+	function defineQueueType(apiData: LeagueEntryDto[]) {
+		if (!apiData) return;
 
-	function defineQueueType(apiData: ApiResponse) {
-	
-		if (!apiData.data) return;
-
-		const data = apiData.data;
+		const data = apiData;
 		data.forEach((entry: LeagueEntryDto) => {
 			if (entry.queueType === 'RANKED_SOLO_5x5') {
 				soloQData = entry;
@@ -40,24 +20,22 @@
 		});
 	}
 
+	defineQueueType(playerInfo.leagueEntries);
+
 </script>
 
-{#await promise}
-	<p>loading...</p>
-{:then response}
-	<div class="card">
-		<div class="card-header border-b-2 mb-1">
-			<h3>{riotId}</h3>
-			<p>{role}</p>
-		</div>
-		<div class="card-body">
-			<LeagueData league={soloQData} type="Solo Queue" />
-			<LeagueData league={flexQData} type="Flex Queue" />
-		</div>
+<div class="card">
+	<div class="card-header border-b-2 mb-1">
+		<h3>{playerInfo.name}</h3>
+		<p>{playerInfo.lane}</p>
 	</div>
-{:catch error}
-	<p>{error.message}</p>
-{/await}
+	<div class="card-body">
+		<LeagueData league={soloQData} type="Solo Queue" />
+		<LeagueData league={flexQData} type="Flex Queue" />
+	</div>
+</div>
+
+
 
 <style>
 	.card {

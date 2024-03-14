@@ -1,7 +1,8 @@
 <script lang="ts">
 	import '../app.css';
-
 	import ProfileCard from '$lib/components/ProfileCard.svelte';
+
+	export let data;
 </script>
 
 <header class="flex fixed w-full">
@@ -18,32 +19,26 @@
 
 <div id="introduction" class="flex items-center justify-center border-b-2">
 	<div id="title" class="text-center text-3xl">
-		<p> Die Welt braucht mehr okaye Leute.</p>
+		<p>Die Welt braucht mehr okaye Leute.</p>
 		<br />
-		<p> In Sachen E-Sports haben wir die Initiative ergriffen.</p>
+		<p>In Sachen E-Sports haben wir die Initiative ergriffen.</p>
 		<br />
-		<p> Wir stellen vor, das</p>
+		<p>Wir stellen vor, das</p>
 		<br />
-		<p class="underline"> WORLDS OKAYEST TEAM </p>
+		<p class="underline">WORLDS OKAYEST TEAM</p>
 	</div>
 </div>
 
 <div id="league-info" class="mt-6 flex flex-col">
 	<p class="text-3xl mb-6 text-center">Das Main Roaster</p>
-		<div class="card-wrapper mb-6">
-			<ProfileCard riotId="WOT Spiiekiie#EUW" role="Top" />
-			<ProfileCard riotId="WOT Forest#EUW" role="Jungle" />
-			<ProfileCard riotId="WOT Aradius#EUW" role="Mid" />
-			<ProfileCard riotId="Poschinski#1337" role="ADC" />
-			<ProfileCard riotId="WOT val played#EUW" role="Support" />
-		</div>
-	<p class="text-3xl mb-6 text-center">Unsere Substitutes</p>
-	<div class="card-wrapper">
-		<ProfileCard riotId="WOT Gustl#EUW" role="Top" />
-		<ProfileCard riotId="WOT DirtySixX#1464" role="Jungle" />
-		<ProfileCard riotId="Skeletonking#EUW" role="Mid" />
-		<ProfileCard riotId="WOT Schorsch#EUW" role="ADC" />
-		<ProfileCard riotId="WOT Rexxit#EUW" role="Support" />
+	<div class="card-wrapper mb-6">
+		{#each data.response as player, i}
+
+			<ProfileCard playerInfo={player} />
+			{#if i === 4}
+				<p class="text-3xl my-6 text-center w-full">Unsere Substitutes</p>
+			{/if}
+		{/each}
 	</div>
 </div>
 
@@ -89,5 +84,4 @@
 	#league-info {
 		width: 100%;
 	}
-
 </style>

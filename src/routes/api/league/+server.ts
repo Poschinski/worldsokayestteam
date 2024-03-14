@@ -1,13 +1,28 @@
 import { json } from "@sveltejs/kit";
-import type { RiotAccountDto, RiotSummonerDto, LeagueEntryDto } from "../lib/index";
+import { lolNames } from "../../../data/lolNames";
+import type { RiotAccountDto, RiotSummonerDto, LeagueEntryDto, LeaguePlayerInfo } from "../../../lib/index";
 
-export const POST = async ({ request }) => {
-    const res = await request.json()
-    const leagueEntries: LeagueEntryDto[] = await getSummonerData(res.riotId);
+export async function GET(event) {
+    const promises = lolNames.map(async (data) => {
+        const leagueEntries = await getSummonerData(data.name);
+        return {
+            name: data.name,
+            lane: data.lane,
+            leagueEntries: leagueEntries
+        };
+    });
+
+    const response: LeaguePlayerInfo[] = await Promise.all(promises);
+
+
+    event.setHeaders({
+        'Cache-Control': 'max-age=60'
+    })
+
     return json({
         status: 200,
         message: 'OK',
-        data: leagueEntries
+        data: response
     })
 }
 
