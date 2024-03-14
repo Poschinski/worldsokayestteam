@@ -38,3 +38,9 @@ export type ApiResponse = {
     message?: string;
     data?: LeagueEntryDto[];
 }
+
+export type LeaguePlayerInfo = {
+    name: string;
+    lane: string;
+    leagueEntries: LeagueEntryDto[];
+}
