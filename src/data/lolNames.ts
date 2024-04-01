@@ -16,7 +16,7 @@ export const lolNames = [
 		lane: 'ADC'
 	},
     {
-		name: 'WOT val played#EUW',
+		name: 'val played#WOT',
 		lane: 'Support'
 	},
     {
