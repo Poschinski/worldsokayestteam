@@ -32,8 +32,8 @@ export const lolNames = [
 		lane: 'Mid'
 	},
     {
-		name: 'WOT Schorsch#EUW',
-		lane: 'ADC'
+		name: 'WOT is Shen#EUW',
+		lane: 'Top / Support'
 	},
     {
 		name: 'WOT Rexxit#EUW',
