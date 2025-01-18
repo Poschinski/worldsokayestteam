@@ -11,13 +11,17 @@
 		if (!apiData) return;
 
 		const data = apiData;
-		data.forEach((entry: LeagueEntryDto) => {
-			if (entry.queueType === 'RANKED_SOLO_5x5') {
-				soloQData = entry;
-			} else if (entry.queueType === 'RANKED_FLEX_SR') {
-				flexQData = entry;
-			}
-		});
+		try {
+			data.forEach((entry: LeagueEntryDto) => {
+				if (entry.queueType === 'RANKED_SOLO_5x5') {
+					soloQData = entry;
+				} else if (entry.queueType === 'RANKED_FLEX_SR') {
+					flexQData = entry;
+				}
+			});
+		} catch (error) {
+			console.log(error);
+		}
 	}
 
 	defineQueueType(playerInfo.leagueEntries);
