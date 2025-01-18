@@ -16,8 +16,8 @@ export const lolNames = [
 		lane: 'ADC'
 	},
     {
-		name: 'val played#WOT',
-		lane: 'Support'
+		name: 'Skeletonking#EUW',
+		lane: 'Mid'
 	},
     {
 		name: 'WOT Gustl#EUW',
@@ -28,15 +28,16 @@ export const lolNames = [
 		lane: 'Jungle'
 	},
     {
-		name: 'Skeletonking#EUW',
-		lane: 'Mid'
-	},
-    {
-		name: 'WOT is Shen#EUW',
+		name: 'quick smoke#kappa',
 		lane: 'Top / Support'
+	},
+	{
+		name: 'val played#WOT',
+		lane: 'ADC'
 	},
     {
 		name: 'WOT Rexxit#EUW',
 		lane: 'Support'
 	}
+	
 ];
