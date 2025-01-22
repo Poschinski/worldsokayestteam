@@ -8,16 +8,16 @@ export const lolNames = [
 		lane: 'Jungle'
 	},
 	{
-		name: 'Wot Aradius#EUW',
+		name: 'Skeletonking#EUW',
 		lane: 'Mid'
 	},
     {
 		name: 'Poschinski#1337',
 		lane: 'ADC'
 	},
-    {
-		name: 'Skeletonking#EUW',
-		lane: 'Mid'
+	{
+		name: 'Wot Aradius#EUW',
+		lane: 'Support'
 	},
     {
 		name: 'WOT Gustl#EUW',
@@ -25,11 +25,11 @@ export const lolNames = [
 	},
     {
 		name: 'WOT DirtySixX#1464',
-		lane: 'Jungle'
+		lane: 'Mid / Jungle'
 	},
     {
 		name: 'quick smoke#kappa',
-		lane: 'Top / Support'
+		lane: 'Jungle / Mid'
 	},
 	{
 		name: 'val played#WOT',
@@ -37,7 +37,6 @@ export const lolNames = [
 	},
     {
 		name: 'WOT Rexxit#EUW',
-		lane: 'Support'
+		lane: 'Support / ADC'
 	}
-	
 ];
