@@ -7,11 +7,14 @@
 	let soloQData: LeagueEntryDto | null = null;
 	let flexQData: LeagueEntryDto | null = null;
 
+	let data: LeagueEntryDto[] | null = null;
+
 	function defineQueueType(apiData: LeagueEntryDto[]) {
 		if (!apiData) return;
 
-		const data = apiData;
+		data = apiData;
 		try {
+			if (data) {
 			data.forEach((entry: LeagueEntryDto) => {
 				if (entry.queueType === 'RANKED_SOLO_5x5') {
 					soloQData = entry;
@@ -19,6 +22,7 @@
 					flexQData = entry;
 				}
 			});
+			}
 		} catch (error) {
 			console.log(error);
 		}
@@ -29,6 +33,9 @@
 </script>
 
 <div class="card">
+	{#if !data}
+		<div>Error loading data...</div>
+	{:else}
 	<div class="card-header border-b-2 mb-1">
 		<h3>{playerInfo.name}</h3>
 		<p>{playerInfo.lane}</p>
@@ -37,6 +44,7 @@
 		<LeagueData league={soloQData} type="Solo Queue" />
 		<LeagueData league={flexQData} type="Flex Queue" />
 	</div>
+	{/if}
 </div>
 
 
