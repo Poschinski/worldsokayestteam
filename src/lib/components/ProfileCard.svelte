@@ -7,14 +7,14 @@
 	let soloQData: LeagueEntryDto | null = null;
 	let flexQData: LeagueEntryDto | null = null;
 
-	let data: LeagueEntryDto[] | null = null;
+	let data: LeagueEntryDto[] | LeagueEntryDto | null = null;
 
 	function defineQueueType(apiData: LeagueEntryDto[]) {
 		if (!apiData) return;
 
 		data = apiData;
 		try {
-			if (data) {
+			if (data && data.length > 1) {
 			data.forEach((entry: LeagueEntryDto) => {
 				if (entry.queueType === 'RANKED_SOLO_5x5') {
 					soloQData = entry;
