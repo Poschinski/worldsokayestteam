@@ -47,7 +47,7 @@
 		border-radius: 10px;
 		overflow: hidden;
 		background-color: #fff;
-		max-width: 600px;
+		width: 340px;
 		margin: 0 auto;
 	}
 	.card h3 {
