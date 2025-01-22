@@ -24,7 +24,7 @@
 	<nav>
 		<a class="p-3 hover:underline" href="#league-info" on:click={handleSectionNavigationScroll}>League</a>
 		<a class="p-3 hover:underline" href="#league-info" on:click={handleSectionNavigationScroll}>Das Team</a>
-		<a class="p-3 hover:underline" href="#league-info" on:click={handleSectionNavigationScroll}>Prime-League</a>
+		<a class="p-3 hover:underline" href="#prime-league" on:click={handleSectionNavigationScroll}>Prime-League</a>
 	</nav>
 </header>
 
