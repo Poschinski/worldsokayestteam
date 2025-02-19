@@ -4,8 +4,8 @@
 
 	export let playerInfo: LeaguePlayerInfo;
 
-	let soloQData: LeagueEntryDto | null = null;
-	let flexQData: LeagueEntryDto | null = null;
+	let soloQData: LeagueEntryDto | undefined
+	let flexQData: LeagueEntryDto | undefined
 
 	let data: LeagueEntryDto[] | LeagueEntryDto | null = null;
 
@@ -13,19 +13,9 @@
 		if (!apiData) return;
 
 		data = apiData;
-		try {
-			if (data && data.length > 1) {
-			data.forEach((entry: LeagueEntryDto) => {
-				if (entry.queueType === 'RANKED_SOLO_5x5') {
-					soloQData = entry;
-				} else if (entry.queueType === 'RANKED_FLEX_SR') {
-					flexQData = entry;
-				}
-			});
-			}
-		} catch (error) {
-			console.log(error);
-		}
+
+		soloQData = data.find(o => o.queueType === 'RANKED_SOLO_5x5')
+		flexQData = data.find(o => o.queueType === 'RANKED_FLEX_SR')
 	}
 
 	defineQueueType(playerInfo.leagueEntries);
@@ -46,8 +36,6 @@
 	</div>
 	{/if}
 </div>
-
-
 
 <style>
 	.card {

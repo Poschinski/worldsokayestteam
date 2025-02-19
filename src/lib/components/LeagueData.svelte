@@ -1,7 +1,7 @@
 <script lang="ts">
     import type { LeagueEntryDto } from '$lib';
 
-    export let league: LeagueEntryDto | null;
+    export let league: LeagueEntryDto | undefined;
     export let type: string;
 </script>
 
