@@ -2,18 +2,27 @@ import { json } from "@sveltejs/kit";
 import { lolNames } from "../../../data/lolNames";
 import type { RiotAccountDto, RiotSummonerDto, LeagueEntryDto, LeaguePlayerInfo } from "../../../lib/index";
 
+async function delay(ms: number) {
+    return new Promise(resolve => setTimeout(resolve, ms));
+}
+
 export async function GET(event) {
-    const promises = lolNames.map(async (data) => {
+    const response: LeaguePlayerInfo[] = [];
+
+    for (let i = 0; i < lolNames.length; i++) {
+        const data = lolNames[i];
         const leagueEntries = await getSummonerData(data.name);
-        return {
+        response.push({
             name: data.name,
             lane: data.lane,
             leagueEntries: leagueEntries
-        };
-    });
+        });
 
-    const response: LeaguePlayerInfo[] = await Promise.all(promises);
-
+        console.log(leagueEntries)
+        if (i % 20 === 19) { // Nach 20 Requests 1 Sekunde warten
+            await delay(1000);
+        }
+    }
 
     event.setHeaders({
         'Cache-Control': 'max-age=60'
