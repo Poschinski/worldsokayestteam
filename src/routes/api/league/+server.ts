@@ -2,11 +2,25 @@ import { json } from "@sveltejs/kit";
 import { lolNames } from "../../../data/lolNames";
 import type { RiotAccountDto, RiotSummonerDto, LeagueEntryDto, LeaguePlayerInfo } from "../../../lib/index";
 
+let cache: { timestamp: number; data: LeaguePlayerInfo[] } | null = null;
+
 async function delay(ms: number) {
     return new Promise(resolve => setTimeout(resolve, ms));
 }
 
 export async function GET(event) {
+    const now = Date.now();
+
+    if (cache && now - cache.timestamp < 60000) {
+        console.log("Returning cached data");
+        return json({
+            status: 200,
+            message: 'OK',
+            data: cache.data
+        });
+    }
+
+    console.log("Fetching new data...");
     const response: LeaguePlayerInfo[] = [];
 
     for (let i = 0; i < lolNames.length; i++) {
@@ -18,11 +32,15 @@ export async function GET(event) {
             leagueEntries: leagueEntries
         });
 
-        console.log(leagueEntries)
         if (i % 20 === 19) { // Nach 20 Requests 1 Sekunde warten
             await delay(1000);
         }
     }
+
+    cache = {
+        timestamp: now,
+        data: response
+    };
 
     event.setHeaders({
         'Cache-Control': 'max-age=60'
@@ -36,8 +54,7 @@ export async function GET(event) {
 }
 
 async function getPUUID(riotId: string) {
-    let name = riotId.split("#")[0];
-    let tag = riotId.split("#")[1];
+    let [name, tag] = riotId.split("#");
     name = encodeURIComponent(name);
     tag = encodeURIComponent(tag);
     const res = await fetch(`https://europe.api.riotgames.com/riot/account/v1/accounts/by-riot-id/${name}/${tag}`, {

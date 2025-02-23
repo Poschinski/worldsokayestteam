@@ -1,5 +1,4 @@
-import { lolNames } from '../data/lolNames';
-import type { LeagueEntryDto, LeaguePlayerInfo } from '../lib/index';
+import type { LeaguePlayerInfo } from '../lib/index';
 
 export async function load({ fetch }) {
 
