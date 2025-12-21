@@ -42,5 +42,5 @@ export type ApiResponse = {
 export type LeaguePlayerInfo = {
     name: string;
     lane: string;
-    leagueEntries: LeagueEntryDto[];
+    leagueEntries: LeagueEntryDto[] | null;
 }

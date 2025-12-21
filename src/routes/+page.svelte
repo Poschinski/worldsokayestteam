@@ -95,16 +95,15 @@
 	<p class="text-3xl text-center">Prime-League</p>
 	<div class="p-6 rounded-lg shadow-lg">
 		<p class="text-lg text-center mb-6">
-		  Wir freuen uns, bekannt zu geben, dass wir dieses Jahr im Split 24/25 in 
+		  Wir freuen uns, bekannt zu geben, dass wir dieses Jahr im Split 25/26 in 
 		  <span class="text-orange-600 font-semibold">Division 6</span> der Prime League antreten werden.
 		</p>
 		<p class="text-center">
-		  Als <a href="https://www.primeleague.gg/de/leagues/prm/3181-spring-split-202425/teams/164964-worldsokayestteam" class="font-semibold text-blue-400 underline">Worlds Okayest Team</a> stehen wir für Teamgeist, Spaß und den 
+		  Als <a href="https://www.primeleague.gg/de/leagues/prm/3181-spring-split-202425/teams/164964-worldsokayestteam" target="_blank" class="font-semibold text-blue-400 underline">Worlds Okayest Team</a> stehen wir für Teamgeist, Spaß und den 
 		  unermüdlichen Willen, OK zu bleiben.
 		</p>
 		<p class="text-center mt-6 italic text-gray-600">
-		  Folgt unserer Instagram Seite, um unsere Fortschritte, Highlights und Memes zu verfolgen - denn wir nehmen das Spiel nicht ernst
-		  und uns selbst nicht zu sehr. 
+		  Folgt unserer Instagram Seite, um unsere Fortschritte, Highlights und Memes zu verfolgen - denn wir nehmen und selbst und unsere Gegner nicht zu ernst. 
 		</p>
 		<div class="text-center mt-8">
 		  <a href="https://www.instagram.com/worldsokayestteam/" target="_blank" class="bg-blue-500 hover:bg-blue-600 text-white px-4 py-2 rounded-full font-bold cursor-pointer shadow-md">

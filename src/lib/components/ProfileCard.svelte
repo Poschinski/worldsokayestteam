@@ -12,13 +12,16 @@
 	function defineQueueType(apiData: LeagueEntryDto[]) {
 		if (!apiData) return;
 
+		console.log('API Data:', apiData);
 		data = apiData;
 
 		soloQData = data.find(o => o.queueType === 'RANKED_SOLO_5x5')
 		flexQData = data.find(o => o.queueType === 'RANKED_FLEX_SR')
 	}
 
-	defineQueueType(playerInfo.leagueEntries);
+	if (playerInfo.leagueEntries) {
+		defineQueueType(playerInfo.leagueEntries);
+	}
 
 </script>
 

@@ -13,6 +13,7 @@ export async function GET(event) {
 
     if (cache && now - cache.timestamp < 60000) {
         console.log("Returning cached data");
+        console.log(cache);
         return json({
             status: 200,
             message: 'OK',
@@ -25,7 +26,7 @@ export async function GET(event) {
 
     for (let i = 0; i < lolNames.length; i++) {
         const data = lolNames[i];
-        const leagueEntries = await getSummonerData(data.name);
+        const leagueEntries = await getLeagueEntries(data.puuid);
         response.push({
             name: data.name,
             lane: data.lane,
@@ -53,49 +54,19 @@ export async function GET(event) {
     })
 }
 
-async function getPUUID(riotId: string) {
-    let [name, tag] = riotId.split("#");
-    name = encodeURIComponent(name);
-    tag = encodeURIComponent(tag);
-    const res = await fetch(`https://europe.api.riotgames.com/riot/account/v1/accounts/by-riot-id/${name}/${tag}`, {
-        headers: {
-            "X-Riot-Token": import.meta.env.VITE_RIOT_API_KEY
-        }
-    });
-    const data: RiotAccountDto = await res.json();
-
-    return data.puuid;
-}
-
-async function getSummonerId(puuid: string) {
-    const res = await fetch(`https://euw1.api.riotgames.com/lol/summoner/v4/summoners/by-puuid/${puuid}`, {
-        headers: {
-            "X-Riot-Token": import.meta.env.VITE_RIOT_API_KEY
-        }
-    });
-    const data: RiotSummonerDto = await res.json();
-
-    return data.id;
-}
-
-async function getLeagueEntries(summonerId: string) {
-    const res = await fetch(`https://euw1.api.riotgames.com/lol/league/v4/entries/by-summoner/${summonerId}`, {
+async function getLeagueEntries(puuid: string) {
+    const res = await fetch(`https://euw1.api.riotgames.com/lol/league/v4/entries/by-puuid/${puuid}`, {
         headers: {
             "X-Riot-Token": import.meta.env.VITE_RIOT_API_KEY
         }
     });
     let data: LeagueEntryDto[] = await res.json();
 
+    console.log(data)
+
+    if (res.status !== 200) return null;
+
     return data;
-}
-
-async function getSummonerData(riotId: string) {
-    
-    const puuid = await getPUUID(riotId);
-    const summonerId = await getSummonerId(puuid);
-    const leagueEntries = await getLeagueEntries(summonerId);
-
-    return leagueEntries;
 }
 
 
