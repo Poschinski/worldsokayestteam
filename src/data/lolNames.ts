@@ -43,7 +43,7 @@ export const lolNames = [
 	},
     {
 		name: 'WOT is Shen#EUW',
-		lane: 'Support / ADC',
+		lane: 'Top / Support',
 		devPuuid: "nlHbG2hNbWTsUF1WJShgH7Vf73wq4432sjh53RbtjoDk15r0xJ7OkuorfK4OwyK1uYUvy-6BVfyQ7Q",
 		puuid: "DJcjMmw4g0huQkxBUftpPHBoMEiD9Vgt9IKWchOZDe1tQDReMB8OorQ6gZmaaXDRwVVDbcvED-vSqQ"
 	}

@@ -12,7 +12,6 @@
 	function defineQueueType(apiData: LeagueEntryDto[]) {
 		if (!apiData) return;
 
-		console.log('API Data:', apiData);
 		data = apiData;
 
 		soloQData = data.find(o => o.queueType === 'RANKED_SOLO_5x5')
@@ -42,20 +41,27 @@
 
 <style>
 	.card {
-		box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
-		border-radius: 10px;
+		box-shadow: 0 8px 24px rgba(0, 0, 0, 0.12);
+		border-radius: 12px;
 		overflow: hidden;
-		background-color: #fff;
+		background: linear-gradient(135deg, #ffffff 0%, #f8f9ff 100%);
 		width: 340px;
 		margin: 0 auto;
+		transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+		border: 1px solid rgba(99, 102, 241, 0.1);
+	}
+	.card:hover {
+		transform: translateY(-8px);
+		box-shadow: 0 12px 32px rgba(99, 102, 241, 0.2);
 	}
 	.card h3 {
-		color: #333;
+		color: #1f2937;
 		font-size: 24px;
 		text-align: center;
+		font-weight: 600;
 	}
 	.card p {
-		color: #666;
+		color: #6b7280;
 		font-size: 18px;
 		text-align: center;
 	}

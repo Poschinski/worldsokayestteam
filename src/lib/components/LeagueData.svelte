@@ -42,8 +42,10 @@
 		display: flex;
 		align-items: center;
 		justify-content: space-between;
-		padding: 10px;
+		padding: 16px;
 		border-radius: 10px;
+		margin-bottom: 12px;
+		transition: all 0.3s ease;
 	}
 	.wins-loses {
 		display: flex;
@@ -60,5 +62,6 @@
 		display: flex;
 		flex-direction: column;
 		align-items: center;
+		color: #374151;
 	}
 </style>

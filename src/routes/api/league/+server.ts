@@ -12,8 +12,6 @@ export async function GET(event) {
     const now = Date.now();
 
     if (cache && now - cache.timestamp < 60000) {
-        console.log("Returning cached data");
-        console.log(cache);
         return json({
             status: 200,
             message: 'OK',
@@ -21,7 +19,6 @@ export async function GET(event) {
         });
     }
 
-    console.log("Fetching new data...");
     const response: LeaguePlayerInfo[] = [];
 
     for (let i = 0; i < lolNames.length; i++) {
@@ -61,8 +58,6 @@ async function getLeagueEntries(puuid: string) {
         }
     });
     let data: LeagueEntryDto[] = await res.json();
-
-    console.log(data)
 
     if (res.status !== 200) return null;
 
