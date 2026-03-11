@@ -34,13 +34,19 @@
 			<br class="hidden sm:block" />
 			<p>Wir stellen vor, das</p>
 			<br class="hidden sm:block" />
-			<p class="underline font-bold">WORLDS OKAYEST TEAM</p>
+			<p class="underline font-bold">
+				{#each "WORLDS OKAYEST TEAM".split('') as char, i}
+					<span class="inline-block animate-letter-glow text-transparent bg-gradient-to-r from-blue-500 to-purple-500 bg-clip-text" style="--char-index: {i}">
+						{char}
+					</span>
+				{/each}
+			</p>
 		</div>
 	</div>
-	<div class="flex items-start justify-center grow-[2]">
+	<div class="flex items-center justify-center grow-[2]">
 		<a
 			href="#league-info"
-			class="flex items-center justify-center"
+			class="relative flex items-center justify-center"
 			on:mouseenter={() => {
 				hoverOnArrowDown = !hoverOnArrowDown;
 			}}
@@ -52,12 +58,12 @@
 			on:click={handleSectionNavigationScroll}
 		>
 			<svg
-				width="40"
-				height="40"
+				width="80"
+				height="80"
 				viewBox="0 0 80 80"
 				version="1.1"
 				xmlns="http://www.w3.org/2000/svg"
-				class="-mr-8"
+				class="absolute"
 			>
 				{#if hoverOnArrowDown}
 					<circle
@@ -72,7 +78,7 @@
 					/>
 				{/if}
 			</svg>
-			<ArrowDown />
+			<ArrowDown size={40} />
 		</a>
 	</div>
 </div>
@@ -146,5 +152,38 @@
 		margin: 0;
 		padding: 0;
 		font-family: 'Roboto', sans-serif;
+	}
+
+	@keyframes gradient {
+		0% {
+			background-position: 0% center;
+		}
+		50% {
+			background-position: 100% center;
+		}
+		100% {
+			background-position: 0% center;
+		}
+	}
+
+	@keyframes letter-glow {
+		0%, 20% {
+			filter: drop-shadow(0 0 0px transparent);
+		}
+		10%, 15% {
+			filter: drop-shadow(0 0 5px rgba(168, 85, 247, 1)) drop-shadow(0 0 10px rgba(59, 130, 246, 0.8));
+		}
+		20%, 100% {
+			filter: drop-shadow(0 0 0px transparent);
+		}
+	}
+
+	:global(.animate-gradient) {
+		animation: gradient 4s ease infinite;
+	}
+
+	:global(.animate-letter-glow) {
+		animation: letter-glow 10s ease-in-out infinite;
+		animation-delay: calc(var(--char-index) * 0.1s);
 	}
 </style>
