@@ -4,10 +4,23 @@
 	import { ArrowDown } from 'svelte-radix';
 	import { draw } from 'svelte/transition';
 	import { quintOut } from 'svelte/easing';
+	import { onMount } from 'svelte';
 
 	export let data;
 
 	let hoverOnArrowDown = false;
+	let startFlyAnimation = false;
+	let showRealTitle = false;
+
+	onMount(() => {
+		setTimeout(() => {
+			startFlyAnimation = true;
+		}, 1000);
+
+		setTimeout(() => {
+        	showRealTitle = true;
+    	}, 2500); // Nach der Fly-Up Animation
+	});
 
 	function handleSectionNavigationScroll(event: any) {
 		event.preventDefault();
@@ -34,16 +47,44 @@
 			<br class="hidden sm:block" />
 			<p>Wir stellen vor, das</p>
 			<br class="hidden sm:block" />
-			<p class="underline font-bold">
-				{#each "WORLDS OKAYEST TEAM".split('') as char, i}
-					<span class="inline-block animate-letter-glow text-transparent bg-gradient-to-r from-blue-500 to-purple-500 bg-clip-text" style="--char-index: {i}">
-						{char}
-					</span>
-				{/each}
-			</p>
+
+			{#if !showRealTitle}
+				<p class="font-bold">
+					{#each 'WORLDS OKAYEST TEAM'.split(' ') as word, wordIndex}
+						<span
+							class={`inline-block ${startFlyAnimation ? 'animate-fly-up' : ''}`}
+							style={`--word-index: ${wordIndex}; opacity: 0; transform: translateY(100px);`}
+						>
+							{#each word.split('') as char, i}
+								<span
+									class="inline-block text-transparent bg-gradient-to-r from-blue-500 to-purple-500 bg-clip-text"
+									style="--char-index: {i}"
+								>
+									{char}
+								</span>
+							{/each}
+						</span>
+						{#if wordIndex < 'WORLDS OKAYEST TEAM'.split(' ').length - 1}
+						<span>{' '}</span>
+						{/if}
+					{/each}
+				</p>
+			{:else}
+				<!-- else content here -->
+				<p class="underline font-bold">
+					{#each 'WORLDS OKAYEST TEAM'.split('') as char, i}
+						<span
+							class="inline-block animate-letter-glow text-transparent bg-gradient-to-r from-blue-500 to-purple-500 bg-clip-text"
+							style="--char-index: {i}"
+						>
+							{char === ' ' ? '\u00A0' : char}
+						</span>
+					{/each}
+				</p>
+			{/if}
 		</div>
 	</div>
-	<div class="flex items-center justify-center grow-[2]">
+	<div class="flex items-center justify-center grow-[3]">
 		<a
 			href="#league-info"
 			class="relative flex items-center justify-center"
@@ -106,7 +147,7 @@
 				Wir freuen uns, bekannt zu geben, dass wir dieses Jahr im Split 25/26 in
 				<span class="text-orange-600 font-semibold">Division 6</span> der Prime League antreten werden.
 			</p>
-			<br/>
+			<br />
 			<p>
 				Mehr Infos dazu findet ihr auf unserer <a
 					href="https://www.primeleague.gg/de/leagues/prm/3218-winter-split-202526/teams/164964-worldsokayestteam"
@@ -167,14 +208,29 @@
 	}
 
 	@keyframes letter-glow {
-		0%, 20% {
+		0%,
+		20% {
 			filter: drop-shadow(0 0 0px transparent);
 		}
-		10%, 15% {
-			filter: drop-shadow(0 0 5px rgba(168, 85, 247, 1)) drop-shadow(0 0 10px rgba(59, 130, 246, 0.8));
+		10%,
+		15% {
+			filter: drop-shadow(0 0 5px rgba(168, 85, 247, 1))
+				drop-shadow(0 0 10px rgba(59, 130, 246, 0.8));
 		}
-		20%, 100% {
+		20%,
+		100% {
 			filter: drop-shadow(0 0 0px transparent);
+		}
+	}
+
+	@keyframes fly-up {
+		0% {
+			opacity: 0;
+			transform: translateY(100px);
+		}
+		100% {
+			opacity: 1;
+			transform: translateY(0);
 		}
 	}
 
@@ -183,7 +239,12 @@
 	}
 
 	:global(.animate-letter-glow) {
-		animation: letter-glow 10s ease-in-out infinite;
-		animation-delay: calc(var(--char-index) * 0.1s);
+		animation: letter-glow 8s ease-in-out infinite;
+		animation-delay: calc(var(--char-index) * 0.08s);
+	}
+
+	:global(.animate-fly-up) {
+		animation: fly-up 0.8s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
+		animation-delay: calc(var(--word-index) * 0.3s);
 	}
 </style>
