@@ -1,11 +1,13 @@
 <script lang="ts">
-	import type { ApiResponse, LeagueEntryDto, LeaguePlayerInfo } from '$lib';
+	import type { LeagueEntryDto, LeaguePlayerInfo } from '$lib';
 	import LeagueData from './LeagueData.svelte';
 
 	export let playerInfo: LeaguePlayerInfo;
 
 	let soloQData: LeagueEntryDto | undefined
 	let flexQData: LeagueEntryDto | undefined
+
+	let urlEncodedName = encodeURIComponent(playerInfo.name.replace('#', '-'));
 
 	let data: LeagueEntryDto[] | LeagueEntryDto | null = null;
 
@@ -25,8 +27,9 @@
 </script>
 
 <div class="card">
+<a href="https://www.leagueofgraphs.com/summoner/euw/{urlEncodedName}" target="_blank" rel="noopener noreferrer">	
 	{#if !data}
-		<div>Error loading data...</div>
+	<div>Error loading data...</div>
 	{:else}
 	<div class="card-header border-b-2 mb-1">
 		<h3>{playerInfo.name}</h3>
@@ -37,6 +40,7 @@
 		<LeagueData league={flexQData} type="Flex Queue" />
 	</div>
 	{/if}
+</a>
 </div>
 
 <style>

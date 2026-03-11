@@ -124,7 +124,7 @@
 	</p>
 	<p class="text-center mt-8 italic text-gray-300">
 		Folgt unserer Instagram Seite, um unsere Fortschritte, Highlights und Memes zu verfolgen - denn
-		wir nehmen und selbst und unsere Gegner nicht zu ernst.
+		wir nehmen uns selbst und unsere Gegner nicht zu ernst.
 	</p>
 	<div class="text-center mt-10">
 		<a
