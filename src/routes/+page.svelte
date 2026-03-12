@@ -49,7 +49,7 @@
 			<br class="hidden sm:block" />
 
 			{#if !showRealTitle}
-				<p class="font-bold">
+			<h2 class="font-bold">
 					{#each 'WORLDS OKAYEST TEAM'.split(' ') as word, wordIndex}
 						<span
 							class={`inline-block ${startFlyAnimation ? 'animate-fly-up' : ''}`}
@@ -68,10 +68,10 @@
 						<span>{' '}</span>
 						{/if}
 					{/each}
-				</p>
+				</h2>
 			{:else}
 				<!-- else content here -->
-				<p class="underline font-bold">
+				<h2 class="underline font-bold">
 					{#each 'WORLDS OKAYEST TEAM'.split('') as char, i}
 						<span
 							class="inline-block animate-letter-glow text-transparent bg-gradient-to-r from-blue-500 to-purple-500 bg-clip-text"
@@ -80,7 +80,7 @@
 							{char === ' ' ? '\u00A0' : char}
 						</span>
 					{/each}
-				</p>
+				</h2>
 			{/if}
 		</div>
 	</div>
@@ -125,12 +125,12 @@
 </div>
 
 <div id="league-info" class="mt-12 flex flex-col w-full border-b-2 pb-12">
-	<p class="text-4xl mb-12 text-center font-bold text-gray-800">Das Main Roaster</p>
+	<h2 class="text-4xl mb-12 text-center font-bold text-gray-800">Das Main Roaster</h2>
 	<div class="card-wrapper mb-12 flex flex-wrap justify-around gap-8">
 		{#each data.response as player, i}
 			<ProfileCard playerInfo={player} />
 			{#if i === 4}
-				<p class="text-3xl my-12 text-center w-full font-bold text-gray-800">Unsere Substitutes</p>
+				<h3 class="text-3xl my-12 text-center w-full font-bold text-gray-800">Unsere Substitutes</h3>
 			{/if}
 			{#if i === 9}
 				<br />
@@ -140,7 +140,7 @@
 </div>
 
 <div id="prime-league" class="pt-12 pb-4 bg-gradient-to-br from-gray-50 via-white to-blue-5">
-	<p class="text-4xl text-center font-bold text-gray-800 mb-8">Prime-League</p>
+	<h2 class="text-4xl text-center font-bold text-gray-800 mb-8">Prime-League</h2>
 	<div class="p-8">
 		<div class="text-lg text-center mb-6">
 			<p>

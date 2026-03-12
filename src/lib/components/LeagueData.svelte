@@ -8,7 +8,11 @@
 <div class="wrapper">
     {#if league}
         <div class="left-side">
-            <img src="/img/{league.tier.toLowerCase()}.png" alt="league rank" />
+            <picture>
+                <source srcset="/img/{league.tier.toLowerCase()}.webp" type="image/webp">
+                <source srcset="/img/{league.tier.toLowerCase()}.png" type="image/png">
+                <img src="/img/{league.tier.toLowerCase()}.png" alt="league rank" />
+            </picture>
             <h3>{type}</h3>
         </div>
         <div class="right-side">
@@ -28,7 +32,11 @@
         </div>
     {:else}
         <div class="left-side">
-            <img src="/img/unranked.png" alt="league rank" />
+            <picture>
+                <source srcset="/img/unranked.webp" type="image/webp">
+                <source srcset="/img/unranked.png" type="image/png">
+                <img src="/img/unranked.png" alt="league rank" />
+            </picture>
             <h3>{type}</h3>
         </div>
         <div class="right-side">

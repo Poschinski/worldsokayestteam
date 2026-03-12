@@ -32,7 +32,7 @@
 	<div>Error loading data...</div>
 	{:else}
 	<div class="card-header border-b-2 mb-1">
-		<h3>{playerInfo.name}</h3>
+		<h2>{playerInfo.name}</h2>
 		<p>{playerInfo.lane}</p>
 	</div>
 	<div class="card-body">
@@ -58,7 +58,7 @@
 		transform: translateY(-8px);
 		box-shadow: 0 12px 32px rgba(99, 102, 241, 0.2);
 	}
-	.card h3 {
+	.card h2 {
 		color: #1f2937;
 		font-size: 24px;
 		text-align: center;

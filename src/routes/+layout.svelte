@@ -75,7 +75,10 @@
 	</div>
 {/if}
 
-<slot></slot>
+<main>
+	<slot></slot>
+</main>
+
 <style lang="postcss">
     header {
         display: flex;
