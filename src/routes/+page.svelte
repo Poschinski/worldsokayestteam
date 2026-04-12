@@ -27,29 +27,60 @@
 		const link = event.currentTarget;
 		const anchorId = new URL(link?.href).hash.replace('#', '');
 		const anchor = document.getElementById(anchorId);
+		const headerHeight = document.querySelector('header')?.offsetHeight ?? 0;
 		window.scrollTo({
-			top: anchor?.offsetTop,
+			top: (anchor?.offsetTop ?? 0) - headerHeight,
 			behavior: 'smooth'
 		});
 	}
+
+	let overlayOpacity = 0.2;
+
+    function handleScroll() {
+        const frontPageElement = document.getElementById('frontPage');
+        if (!frontPageElement) return;
+
+        const frontPageHeight = frontPageElement.offsetHeight;
+        // window.scrollY auf die Höhe der Seite normalisieren (0 bis 1)
+        const scrollPercentage = Math.min(Math.max(window.scrollY / frontPageHeight, 0), 1);
+
+        // Definition der Schwellenwerte
+        const start = 0.5; // Ab 50% Scrollhöhe geht's los
+        const end = 0.8;   // Bei 80% ist das Maximum erreicht
+
+        if (scrollPercentage <= start) {
+            overlayOpacity = 0.2;
+        } else if (scrollPercentage >= end) {
+            overlayOpacity = 1.0;
+        } else {
+            // Saubere Berechnung des Fortschritts zwischen start und end (0 bis 1)
+            const progress = (scrollPercentage - start) / (end - start);
+            // Umrechnung auf den Opacity-Bereich (0.4 bis 1.0)
+            overlayOpacity = 0.4 + (progress * 0.6);
+        }
+    }
 </script>
 
+<svelte:window on:scroll={handleScroll} />
+
 <div
-	class="flex flex-col h-screen border-b-2 bg-gradient-to-br from-gray-50 via-white to-blue-50"
+	class="flex flex-col h-screen relative"
 	id="frontPage"
 >
-	<div class="placeholder grow-[2]"></div>
-	<div id="introduction" class="flex items-center justify-center grow-[14] px-4">
+	<div class="absolute inset-0 bg-cover bg-center bg-no-repeat animate-fade-in bg-scroll sm:bg-fixed" style="background-image: url('/img/wot_team_foto.webp');"></div>
+	<div class="absolute inset-0 bg-gradient-to-br from-gray-50 via-white to-blue-50 transition-opacity duration-300" style="opacity: {overlayOpacity}"></div>
+	<div class="placeholder grow-[2] relative z-10"></div>
+	<div id="introduction" class="flex items-center justify-center grow-[14] px-4 relative z-10">
 		<div id="title" class="text-center text-2xl sm:text-3xl md:text-4xl lg:text-5xl text-gray-800">
-			<p>Die Welt braucht mehr okaye Leute.</p>
+			<!-- <p class="font-bold">Die Welt braucht mehr okaye Leute.</p>
 			<br class="hidden sm:block" />
-			<p>In Sachen E-Sports haben wir die Initiative ergriffen.</p>
+			<p class="font-bold">In Sachen E-Sports haben wir die Initiative ergriffen.</p>
 			<br class="hidden sm:block" />
-			<p>Wir stellen vor, das</p>
+			<p class="font-bold">Wir stellen vor, das</p> -->
 			<br class="hidden sm:block" />
 
 			{#if !showRealTitle}
-			<h2 class="font-bold">
+			<h1 class="font-bold text-3xl sm:text-8xl mt-48 title-text drop-shadow-lg">
 					{#each 'WORLDS OKAYEST TEAM'.split(' ') as word, wordIndex}
 						<span
 							class={`inline-block ${startFlyAnimation ? 'animate-fly-up' : ''}`}
@@ -68,10 +99,10 @@
 						<span>{' '}</span>
 						{/if}
 					{/each}
-				</h2>
+				</h1>
 			{:else}
 				<!-- else content here -->
-				<h2 class="underline font-bold">
+				<h1 class="underline font-bold text-3xl sm:text-8xl mt-48 title-text drop-shadow-lg">
 					{#each 'WORLDS OKAYEST TEAM'.split('') as char, i}
 						<span
 							class="inline-block animate-letter-glow text-transparent bg-gradient-to-r from-blue-500 to-purple-500 bg-clip-text"
@@ -80,11 +111,11 @@
 							{char === ' ' ? '\u00A0' : char}
 						</span>
 					{/each}
-				</h2>
+				</h1>
 			{/if}
 		</div>
 	</div>
-	<div class="flex items-center justify-center grow-[3]">
+	<div class="flex items-center justify-center grow-[3] relative z-10">
 		<a
 			href="#league-info"
 			class="relative flex items-center justify-center"
@@ -124,13 +155,13 @@
 	</div>
 </div>
 
-<div id="league-info" class="mt-12 flex flex-col w-full border-b-2 pb-12">
-	<h2 class="text-4xl mb-12 text-center font-bold text-gray-800">Das Main Roaster</h2>
+<div id="league-info" class="mt-8 flex flex-col w-full border-b-2 pb-12">
+	<h2 class="text-4xl mb-8 text-center font-bold text-gray-800">Das Main Roaster</h2>
 	<div class="card-wrapper mb-12 flex flex-wrap justify-around gap-8">
 		{#each data.response as player, i}
 			<ProfileCard playerInfo={player} />
 			{#if i === 4}
-				<h3 class="text-3xl my-12 text-center w-full font-bold text-gray-800">Unsere Substitutes</h3>
+				<h3 class="text-3xl mt-3 text-center w-full font-bold text-gray-800">Unsere Substitutes</h3>
 			{/if}
 			{#if i === 9}
 				<br />
@@ -144,8 +175,8 @@
 	<div class="p-8">
 		<div class="text-lg text-center mb-6">
 			<p>
-				Wir freuen uns, bekannt zu geben, dass wir dieses Jahr im Split 25/26 in
-				<span class="text-orange-600 font-semibold">Division 6</span> der Prime League antreten werden.
+				Wir freuen uns, bekannt zu geben, dass wir dieses Jahr im Summer-Split 25/26 in
+				<span class="text-orange-600 font-semibold">Division 5</span> der Prime League antreten werden.
 			</p>
 			<br />
 			<p>
@@ -234,6 +265,15 @@
 		}
 	}
 
+	@keyframes fade-in {
+		0% {
+			opacity: 0;
+		}
+		100% {
+			opacity: 1;
+		}
+	}
+
 	:global(.animate-gradient) {
 		animation: gradient 4s ease infinite;
 	}
@@ -247,4 +287,10 @@
 		animation: fly-up 0.8s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
 		animation-delay: calc(var(--word-index) * 0.3s);
 	}
+
+	:global(.animate-fade-in) {
+		animation: fade-in 3s ease-in-out forwards;
+	}
+
+
 </style>

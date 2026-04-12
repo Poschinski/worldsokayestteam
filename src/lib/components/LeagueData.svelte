@@ -8,7 +8,7 @@
 <div class="wrapper">
     {#if league}
         <div class="left-side">
-            <picture>
+            <picture class="mb-[-16px]">
                 <source srcset="/img/{league.tier.toLowerCase()}.webp" type="image/webp">
                 <source srcset="/img/{league.tier.toLowerCase()}.png" type="image/png">
                 <img src="/img/{league.tier.toLowerCase()}.png" alt="league rank" />
@@ -50,10 +50,10 @@
 		display: flex;
 		align-items: center;
 		justify-content: space-between;
-		padding: 16px;
+		padding: 8px;
 		border-radius: 10px;
-		margin-bottom: 12px;
 		transition: all 0.3s ease;
+        margin-top: -4px;
 	}
 	.wins-loses {
 		display: flex;
