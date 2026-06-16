@@ -170,13 +170,26 @@
 	</div>
 </div>
 
-<div id="prime-league" class="pt-12 pb-4 bg-gradient-to-br from-gray-50 via-white to-blue-5">
-	<h2 class="text-4xl text-center font-bold text-gray-800 mb-8">Prime-League</h2>
+<div id="stadtradeln" class="pt-10 pb-4 bg-gray-200">
+	<h2 class="text-4xl text-center font-bold text-gray-800">Stadtradeln</h2>
+	<div class="p-8 flex flex-col items-center gap-6">
+		<p class="text-center">Dieses Jahr sind außerdem beim Stadtradeln dabei.</p>
+		<h4>Team <span class="text-orange-600 font-semibold">Push dich</span></h4>
+		<div style="width: auto !important; min-width: 375px; max-width: 415px; height: 415px;">
+		<!-- svelte-ignore a11y-missing-attribute -->
+		<iframe style="width: 100%; height: 100%;" frameborder="0" scrolling="no" src="https://login.stadtradeln.de/specials/radelmeter/team/79240?L=0"></iframe>
+		</div>
+	</div>
+</div>
+
+<div id="prime-league" class="pt-10 pb-4">
+	<h2 class="text-4xl text-center font-bold text-gray-800 mb-4">Prime-League</h2>
 	<div class="p-8">
 		<div class="text-lg text-center mb-6">
 			<p>
 				Wir freuen uns, bekannt zu geben, dass wir dieses Jahr im Summer-Split 25/26 in
-				<span class="text-orange-600 font-semibold">Division 5</span> der Prime League antreten werden.
+				<span class="text-orange-600 font-semibold">Division 5</span> der Prime League antreten. <br />
+				Aktuell läufts aber nicht so gut, daher bitte uns nicht darauf ansprechen.
 			</p>
 			<br />
 			<p>

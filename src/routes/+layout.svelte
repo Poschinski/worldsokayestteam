@@ -27,11 +27,14 @@
 	</a>
 
 	<nav class="desktop-nav">
+		<a class="nav-link" href="#team" on:click={handleSectionNavigationScroll}>
+			<span class="text-xl">Das Team</span>
+		</a>
 		<a class="nav-link" href="#league-info" on:click={handleSectionNavigationScroll}>
 			<span class="text-xl">League</span>
 		</a>
-		<a class="nav-link" href="#league-info" on:click={handleSectionNavigationScroll}>
-			<span class="text-xl">Das Team</span>
+		<a class="nav-link" href="#stadtradeln" on:click={handleSectionNavigationScroll}>
+			<span class="text-xl">Stadtradeln</span>
 		</a>
 		<a class="nav-link" href="#prime-league" on:click={handleSectionNavigationScroll}>
 			<span class="text-xl">Prime-League</span>
@@ -72,14 +75,21 @@
 				href="#league-info"
 				on:click={handleSectionNavigationScroll}
 			>
-				League
+				Das Team
 			</a>
 			<a
 				class="mobile-link"
 				href="#league-info"
 				on:click={handleSectionNavigationScroll}
 			>
-				Das Team
+				League
+			</a>
+			<a
+				class="mobile-link"
+				href="#stadtradeln"
+				on:click={handleSectionNavigationScroll}
+			>
+				Stadtradeln
 			</a>
 			<a
 				class="mobile-link"
